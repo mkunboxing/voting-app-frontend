@@ -10,6 +10,8 @@ const Profile = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -26,7 +28,8 @@ const Profile = () => {
         }
 
         // Make a GET request to the profile route on the backend
-        const response = await axios.get("http://localhost:8000/user/profile", {
+        
+        const response = await axios.get(`${backendURL}/user/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -52,11 +55,12 @@ const Profile = () => {
       try {
         // Fetch user data from the server using the stored token
         const token = localStorage.getItem("Token");
+        
 
         if (token) {
           // Wait for the token to be set before checking the user role
           const response = await axios.get(
-            "http://localhost:8000/user/profile",
+            `${backendURL}/user/profile`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

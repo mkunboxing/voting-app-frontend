@@ -10,7 +10,7 @@ import VotingList from "./pages/votingList";
 import AuthHandler from "./pages/Authhandler";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import '../env';
+
 
 const App = () => {
   return (

@@ -15,11 +15,12 @@ const VotingList = () => {
   const [alertMessage, setAlertMessage] = useState('');
   const navigate = useNavigate();
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
         // Make a GET request to fetch candidates
-        const response = await axios.get('http://localhost:8000/candidate/list');
+        const response = await axios.get(`${backendURL}/candidate/list`);
         setCandidates(response.data.response);
       } catch (error) {
         console.error('Error fetching candidates:', error.response.data.error);
@@ -30,6 +31,8 @@ const VotingList = () => {
     fetchCandidates();
   }, []);
 
+  
+
   const handleVoteClick = async (candidateId) => {
     try {
       // Get the token from local storage
@@ -37,7 +40,7 @@ const VotingList = () => {
   
       // Make a POST request to the vote route for the specific candidate
       const response = await axios.post(
-        `http://localhost:8000/candidate/vote/${candidateId}`,
+        `${backendURL}/candidate/vote/${candidateId}`,
         {},
         {
           headers: {

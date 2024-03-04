@@ -15,7 +15,7 @@ const CandidatesList = () => {
   const [alertMessage, setAlertMessage] = useState('');
   const navigate = useNavigate();
 
-  const backendURL = process.env.BACKEND_URL;
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchCandidates = async () => {

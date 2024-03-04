@@ -8,7 +8,6 @@ import { Card, CardContent, Typography } from "@mui/material";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-
   useEffect(() => {
     const checkTokenAndRedirect = () => {
       // Get the token from local storage

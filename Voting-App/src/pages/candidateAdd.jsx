@@ -21,6 +21,7 @@ const CandidateAdd = () => {
     age: "",
   });
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -38,7 +39,7 @@ const CandidateAdd = () => {
   
       // Make a POST request to backend route with authorization header
       const response = await axios.post(
-        "http://localhost:8000/candidate/add",
+       `${backendURL}/candidate/add`,
         formData,
         {
           headers: {

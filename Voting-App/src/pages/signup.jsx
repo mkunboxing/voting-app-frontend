@@ -35,13 +35,15 @@ const UserForm = () => {
     }));
   };
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       // Make a POST request to backend route
       const response = await axios.post(
-        "http://localhost:8000/user/signup",
+        `${backendURL}/user/signup`,
         formData
       );
       const token = response.data.token;

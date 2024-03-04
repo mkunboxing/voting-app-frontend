@@ -8,7 +8,7 @@ import Navbar from '../components/navbar';
 const Admin = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
-
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -18,7 +18,7 @@ const Admin = () => {
           navigate('/user/login');
           return;
         }
-        const response = await axios.get(`http://localhost:8000/user/profile`, {
+        const response = await axios.get(`${backendURL}/user/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

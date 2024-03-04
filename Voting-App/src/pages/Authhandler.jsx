@@ -6,6 +6,7 @@ const AuthHandler = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const checkUserRole = async () => {
       try {
@@ -14,7 +15,7 @@ const AuthHandler = () => {
 
         if (token) {
           // Wait for the token to be set before checking the user role
-          const response = await axios.get('http://localhost:8000/user/profile', {
+          const response = await axios.get(`${backendURL}/user/profile`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

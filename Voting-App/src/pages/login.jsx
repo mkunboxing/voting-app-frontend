@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import Navbar from '../components/navbar';
 
@@ -10,6 +10,10 @@ const Login = () => {
     aadharNumber: '',
     password: '',
   });
+
+  const [loading, setLoading] = useState(false);
+
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,8 +25,10 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
+
+      setLoading(true); 
       // Make a POST request to the login route on the backend
-      const response = await axios.post('http://localhost:8000/user/login', formData);
+      const response = await axios.post(`${backendURL}/user/login`, formData);
 
       // Assuming the response structure has a token field
       const token = response.data.token;
@@ -35,6 +41,8 @@ const Login = () => {
     } catch (error) {
       console.error('Login failed:', error.response.data.error);
       // Handle login failure, show error message, etc.
+    }finally {
+      setLoading(false); // Set loading to false after login completes (whether success or failure)
     }
   };
 
@@ -66,8 +74,8 @@ const Login = () => {
           fullWidth
           style={{ marginBottom: '1rem' }}
         />
-        <Button onClick={handleLogin} variant="contained" color="primary">
-          Login
+        <Button onClick={handleLogin} variant="contained" color="primary" disabled={loading}>
+          {loading ? <CircularProgress size={24} /> : 'Login'}
         </Button>
       </form>
       <p>
