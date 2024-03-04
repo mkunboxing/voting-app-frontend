@@ -42,7 +42,7 @@ function Navbar({ pages, settings }) {
   };
   const shouldShowAvatar = () => {
     // Show the avatar only on the profile page and hide it on other pages
-    return  location.pathname === '/user/profile'|| location.pathname === '/admin';
+    return  location.pathname === '/user/profile'|| location.pathname === '/admin' || location.pathname === '/candidate/list' || location.pathname === '/Voting/list';
   };
   return (
     <AppBar position="sticky">

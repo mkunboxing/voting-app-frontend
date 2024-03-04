@@ -12,28 +12,18 @@ const Admin = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        // Get the token from local storage
         const token = localStorage.getItem('Token');
-
-        // If the token is not found, handle the error or redirect to login
         if (!token || isTokenExpired(token)) {
           console.error('Token Not Found or Expired');
           navigate('/user/login');
-          // Handle error, redirect to login, or show an error message
-          // For example, navigate('/login') to redirect to the login page
           return;
         }
-
-        // Make a GET request to the profile route on the backend
-        const response = await axios.get('http://localhost:8000/user/profile', {
+        const response = await axios.get(`http://localhost:8000/user/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
-        // Assuming the response structure has a user field
         setUserData(response.data.user);
-        // console.log('User Profile:', response.data.user);
       } catch (error) {
         console.error('Error fetching user profile:', error.response.data.error);
         // Handle error, redirect, or show an error message
@@ -67,11 +57,15 @@ const Admin = () => {
           <p>Age: {userData.age}</p>
           {/* <p>ID: {userData._id}</p> */}
           <p>role: {userData.role}</p>
-          {userData.role !== 'admin' && (
-            <Button variant="contained" color="primary" component={Link} to="/candidate/list">
+          {userData.role === 'admin' && (
+            <Button variant="contained" color="primary" component={Link} to="/candidate/add">
+              Add Candidates
+            </Button>
+            
+          )}
+          <Button variant="contained" color="primary" component={Link} to="/candidate/list">
               Candidates List
             </Button>
-          )}
         </div>
       ) : (
         <p>Loading...</p>

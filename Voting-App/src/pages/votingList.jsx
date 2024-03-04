@@ -8,20 +8,18 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useNavigate, Link } from 'react-router-dom';
 
-const CandidatesList = () => {
+const VotingList = () => {
   const [candidates, setCandidates] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertSeverity, setAlertSeverity] = useState('success');
   const [alertMessage, setAlertMessage] = useState('');
   const navigate = useNavigate();
 
-  const backendURL = process.env.BACKEND_URL;
-
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
         // Make a GET request to fetch candidates
-        const response = await axios.get(`${backendURL}/candidate/list`);
+        const response = await axios.get('http://localhost:8000/candidate/list');
         setCandidates(response.data.response);
       } catch (error) {
         console.error('Error fetching candidates:', error.response.data.error);
@@ -39,7 +37,7 @@ const CandidatesList = () => {
   
       // Make a POST request to the vote route for the specific candidate
       const response = await axios.post(
-        `${backendURL}/candidate/vote/${candidateId}`,
+        `http://localhost:8000/candidate/vote/${candidateId}`,
         {},
         {
           headers: {
@@ -71,13 +69,6 @@ const CandidatesList = () => {
       // Handle error, show an error message, or redirect
     }
   };
-
-  const handleEditClick = async (candidateId) => {
-    
-  }
-  const handleDeleteClick = async (candidateId) => {
-    
-  }
   
 
   const showAlert = () => {
@@ -100,7 +91,7 @@ const CandidatesList = () => {
   return (
     <div>
       <Navbar pages={pages} settings={settings} />
-      <h2>Candidates List</h2>
+      <h2>Voting List</h2>
       <ul>
         {candidates.map((candidate) => (
           <li key={candidate._id}>
@@ -108,9 +99,7 @@ const CandidatesList = () => {
 
             {/* Integrate the VoteButton component */}
             <VoteButton candidateName={candidate.name} onVoteClick={() => handleVoteClick(candidate._id)}
-            
-            showEditButton={true} onEditClick={()=> handleEditClick(candidate._id)}
-            showDeleteButton={true} onDeleteClick={()=> handleDeleteClick(candidate._id)} />
+            showVoteButton={true} />
           </li>
         ))}
       </ul>
@@ -125,4 +114,4 @@ const CandidatesList = () => {
   );
 };
 
-export default CandidatesList;
+export default VotingList;

@@ -5,9 +5,12 @@ import Profile from "./pages/profile";
 import LandingPage from "./pages/landing";
 import CandidatesList from "./pages/candidatesList";
 import Admin from "./pages/admin";
+import CandidateAdd from "./pages/candidateAdd";
+import VotingList from "./pages/votingList";
 import AuthHandler from "./pages/Authhandler";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import '../env';
 
 const App = () => {
   return (
@@ -20,6 +23,8 @@ const App = () => {
       <Route path="/candidate/list" element={<CandidatesList />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/auth-handler" element={<AuthHandler />} />
+      <Route path="/candidate/add" element={<CandidateAdd />} />
+      <Route path="/voting/list" element={<VotingList />} />
     </Routes>
     </BrowserRouter>
   );
