@@ -47,7 +47,7 @@ const Admin = () => {
 
   return (
     <div>
-      <Navbar pages={pages} settings={settings} />
+      <Navbar pages={pages} settings={settings} name={userData?.name.charAt(0).toUpperCase()} />
       <h2>Admin Dashboard</h2>
       {userData ? (
         <div>

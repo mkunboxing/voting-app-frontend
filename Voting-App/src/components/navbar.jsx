@@ -13,8 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+// import { deepOrange, deepPurple, blue } from '@mui/material/colors';
 
-function Navbar({ pages, settings }) {
+function Navbar({ pages, settings, name }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -42,8 +43,11 @@ function Navbar({ pages, settings }) {
   };
   const shouldShowAvatar = () => {
     // Show the avatar only on the profile page and hide it on other pages
-    return  location.pathname === '/user/profile'|| location.pathname === '/admin' || location.pathname === '/candidate/list' || location.pathname === '/Voting/list';
+    return  location.pathname === '/user/profile'|| location.pathname === '/admin'
   };
+
+
+
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
@@ -140,7 +144,7 @@ function Navbar({ pages, settings }) {
             {shouldShowAvatar() && (
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="User Avatar" src="/static/images/avatar.jpg" />
+                <Avatar>{name}</Avatar>
                 </IconButton>
               </Tooltip>
             )}
@@ -173,4 +177,4 @@ function Navbar({ pages, settings }) {
   );
 }
 
-export default Navbar;
+export default Navbar
