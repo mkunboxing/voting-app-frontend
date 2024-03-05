@@ -8,6 +8,7 @@ import Admin from "./pages/admin";
 import CandidateAdd from "./pages/candidateAdd";
 import VotingList from "./pages/votingList";
 import AuthHandler from "./pages/Authhandler";
+import VoteResult from "./pages/voteResult";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -25,6 +26,7 @@ const App = () => {
       <Route path="/auth-handler" element={<AuthHandler />} />
       <Route path="/candidate/add" element={<CandidateAdd />} />
       <Route path="/voting/list" element={<VotingList />} />
+      <Route path="/vote/result" element={<VoteResult />} />
     </Routes>
     </BrowserRouter>
   );

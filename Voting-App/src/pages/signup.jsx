@@ -9,6 +9,7 @@ import {
   Select,
   MenuItem,
   Container,
+  CircularProgress,
 } from "@mui/material";
 import Navbar from "../components/navbar";
 import { useTheme } from "@mui/material/styles";
@@ -27,6 +28,8 @@ const UserForm = () => {
     isVoted: false,
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -41,6 +44,8 @@ const UserForm = () => {
     e.preventDefault();
 
     try {
+
+      setLoading(true);
       // Make a POST request to backend route
       const response = await axios.post(
         `${backendURL}/user/signup`,
@@ -57,6 +62,8 @@ const UserForm = () => {
       navigate("/user/profile");
     } catch (error) {
       console.error("Error submitting data:", error);
+    }finally {
+      setLoading(false); // Set loading to false after signup completes (whether success or failure)
     }
   };
 
@@ -175,9 +182,12 @@ const UserForm = () => {
             style={{ marginBottom: "1rem" }}
           />
           <div>
-            <Button type="submit" variant="contained" color="primary">
+            {/* <Button type="submit" variant="contained" color="primary">
               Submit
-            </Button>
+            </Button> */}
+            <Button type="submit"  variant="contained" color="primary" disabled={loading}>
+          {loading ? <CircularProgress size={24} /> : 'Submit'}
+        </Button>
           </div>
         </form>
       </Container>

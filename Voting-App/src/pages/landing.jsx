@@ -29,10 +29,8 @@ const LandingPage = () => {
     return expirationTime < Date.now();
   };
   const pages = [
-    { path: "/user/profile", label: "Profile" },
     { path: "/user/login", label: "Login" },
     { path: "/user/signup", label: "Signup" },
-    { path: "/candidate/list", label: "Candidates List" },
   ];
 
   return (
@@ -42,7 +40,7 @@ const LandingPage = () => {
       <h2
         style={{
           textAlign: "center",
-          marginTop: "80px",
+          marginTop: "30px",
           color: "blue",
           fontWeight: "bold",
           fontSize: "30px",
@@ -52,15 +50,34 @@ const LandingPage = () => {
         Welcome to India's Online Voting Portal
       </h2>
 
+      <h2
+        style={{
+          textAlign: "center",
+          marginTop: "40px",
+          color: "gray",
+          fontWeight: "bold",
+          fontSize: "30px",
+        }}
+      >
+        {" "}
+        Register to Vote
+      </h2>
+
       <div
         style={{
           display: "flex",
-          justifyContent: "space-around",
+          alignItems: "center",
+          flexWrap: "wrap",
+          justifyContent: "center",
           marginTop: "40px",
           flexWrap: "wrap",
         }}
       >
-        <Card sx={{minWidth: 200,textAlign: "center", color: "#ef5350" }} component={Link} to="/user/signup">
+        <Card
+          sx={{ minWidth: 150, textAlign: "center", color: "#ef5350", margin: "10px" }}
+          component={Link}
+          to="/user/signup"
+        >
           <CardContent>
             <Typography variant="h5" component="div">
               Register
@@ -68,15 +85,20 @@ const LandingPage = () => {
           </CardContent>
         </Card>
 
-        <Card sx={{ minWidth: 200,textAlign: "center" ,color: "#ef5350" }}>
+        <Card sx={{ minWidth: 150, textAlign: "center", color: "#ef5350" , margin: "10px"  }}
+          component={Link} to="/vote/result">
           <CardContent>
             <Typography variant="h5" component="div">
-              Election Results
+              Results
             </Typography>
           </CardContent>
         </Card>
 
-        <Card sx={{ minWidth: 200, textAlign: "center",color: "#ef5350" }} component={Link} to="/user/login">
+        <Card
+          sx={{ minWidth: 150, textAlign: "center", color: "#ef5350", margin: "10px"  }}
+          component={Link}
+          to="/user/login"
+        >
           <CardContent>
             <Typography variant="h5" component="div">
               Login

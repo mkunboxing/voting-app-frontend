@@ -7,6 +7,7 @@ import VoteButton from '../components/voteButton';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useNavigate, Link } from 'react-router-dom';
+import EditCandidateDialog from '../components/editCandidateDialog';
 
 const CandidatesList = () => {
   const [candidates, setCandidates] = useState([]);
@@ -14,6 +15,8 @@ const CandidatesList = () => {
   const [alertSeverity, setAlertSeverity] = useState('success');
   const [alertMessage, setAlertMessage] = useState('');
   const navigate = useNavigate();
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
 
   const backendURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -72,11 +75,50 @@ const CandidatesList = () => {
     }
   };
 
-  const handleEditClick = async (candidateId) => {
-    
-  }
+  const handleEditClick = (candidateId) => {
+    // Set the selected candidate for editing
+    setSelectedCandidate(candidateId);
+
+    // Open the edit dialog
+    setEditDialogOpen(true);
+  };
   const handleDeleteClick = async (candidateId) => {
-    
+    try {
+      // Get the token from local storage
+      const token = localStorage.getItem('Token');
+  
+      // Make a POST request to the vote route for the specific candidate
+      const response = await axios.delete(
+        `${backendURL}/candidate/${candidateId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      // Check the response and handle success or failure accordingly
+      if (response.status === 200) {
+        setAlertSeverity('success');
+        setAlertMessage(`Successfully Deleted for ${candidateId}`);
+        showAlert();
+  
+        // Automatically navigate to the profile section after 2 seconds
+        setTimeout(() => {
+          navigate('/user/profile');
+        }, 2000);
+      }else {
+        setAlertSeverity('error');
+        setAlertMessage(`Failed to Delete for ${candidateId}`);
+        showAlert();
+        // Handle failure, show an error message, or redirect
+      }
+    } catch (error) {
+      setAlertSeverity('error');
+      setAlertMessage(`Error: ${error.response.data.error}`);
+      showAlert();
+      // Handle error, show an error message, or redirect
+    }
   }
   
 
@@ -114,6 +156,9 @@ const CandidatesList = () => {
           </li>
         ))}
       </ul>
+
+      {/* Edit Candidate Dialog */}
+      <EditCandidateDialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)} candidateId={selectedCandidate} />
 
       {/* Alert */}
       <Snackbar open={alertOpen} autoHideDuration={2000} onClose={handleAlertClose}>
