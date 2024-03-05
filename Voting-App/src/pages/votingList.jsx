@@ -95,9 +95,9 @@ const VotingList = () => {
     <div>
       <Navbar pages={pages} settings={settings} />
       <h2>Voting List</h2>
-      <ul>
+      <ul style={{ listStyle: 'none', padding: 5, }}>
         {candidates.map((candidate) => (
-          <li key={candidate._id}>
+          <li style={{ textAlign: 'center', fontSize: 18,marginBottom: 20 }} key={candidate._id}>
             <strong>Name:</strong> {candidate.name} | <strong>Party:</strong> {candidate.party} |
 
             {/* Integrate the VoteButton component */}
