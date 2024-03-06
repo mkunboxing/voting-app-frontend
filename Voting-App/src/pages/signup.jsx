@@ -70,7 +70,6 @@ const UserForm = () => {
   const pages = [
     { path: "/", label: "Home" },
     { path: "/user/login", label: "Login" },
-    { path: "/candidate/list", label: "Candidates List" },
   ];
   const theme = useTheme();
   return (

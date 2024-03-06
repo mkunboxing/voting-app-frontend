@@ -47,9 +47,9 @@ const Login = () => {
   };
 
   const pages = [
-    { path: '/user/signup', label: 'Signup' },
-    { path: '/candidate/list', label: 'Candidates List' },
     { path: '/', label: 'Home' },
+    { path: '/user/signup', label: 'Signup' },
+    
   ];
 
   return (
