@@ -55,6 +55,7 @@ const Admin = () => {
           <p>Aadhar Number: {userData.aadharNumber}</p>
           <p>Address: {userData.address}</p>
           <p>Age: {userData.age}</p>
+          <p>Mobile: {userData.mobile}</p>
           {/* <p>ID: {userData._id}</p> */}
           <p>role: {userData.role}</p>
           {userData.role === 'admin' && (
